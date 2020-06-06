@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       class Books{
+           constructor(bookname,price,amount){
+               this.bookname = bookname; this.price=price;this.amount=amount;
+               Books.totalAmount=Books.totalAmount||0;
+               Books.totalAmount +=this.amount;
+               Books.TotalPrice = Books.TotalPrice || 0;
+               Books.TotalPrice +=this.subTotalPrice;
+           }
+           get subTotalPrice(){return this.price * this.amount}
+           outSub(){
+               console.log(`销售《${this.bookname}》${this.amount}本，合计${this.subTotalPrice}元`)
+           }
+           static outTotal(){
+               console.log(`累计销售图书${Books.totalAmount}本，累计${Books.TotalPrice}元`);
+           }
+       }
+       let book1 = new Books('数据库',30.23,20);
+       book1.outSub();
+       let book2 = new Books('PHP',40.5,10);
+       book2.outSub();
+       Books.outTotal();
+    </script>
+</body>
+</html>

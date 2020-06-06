@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+       let jionStr=function(...args){
+           return args.join(',');
+       };
+       let hander={
+           apply(target,thisArgument,argumentsList){
+               thisArgument = thisArgument || 'A';
+               argumentsList = argumentsList.map(a => thisArgument + a);
+               return Reflect.apply(target,thisArgument,argumentsList);
+           }
+       }
+       let joinPx = new Proxy(jionStr,hander);
+       console.log(joinPx(101,103,102,105));
+       console.log(joinPx.apply('B',[101,103,102,105]));
+    </script>
+</body>
+</html>

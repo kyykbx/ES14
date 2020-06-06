@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let phonePrice = { Mate30: 4999, iPhoneXR: 4899, OnePlus: 3999, GalaxyA90: 4499, Redmi10x: 999 };
+        let hander = {
+            ownKeys(target) {
+                return Reflect.ownKeys(target).filter(key => key !='Mate30' && key != 'iPhoneXR')
+            },
+            deleteProperty(source, property) {
+                if (property !='Mate30' && property != 'iPhoneXR')
+                    Reflect.deleteProperty(source,property);
+                else
+                    throw new TypeError(`属性${property}不能删除`);
+            }
+        }
+        let phonePx = new Proxy(phonePrice, hander);
+        console.log(Object.keys(phonePx));
+        delete phonePx.OnePlus;
+        console.log(Object.keys(phonePx));
+        delete phonePx.iPhoneXR;
+    </script>
+</body>
+</html>
+
+
+
+
+
